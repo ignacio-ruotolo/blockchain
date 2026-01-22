@@ -98,12 +98,12 @@ stateDiagram-v2
     RELEASED --> [*]
     REFUNDED --> [*]
 
-    %% State styling
-    classDef initial fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px
-    classDef funded fill:#E8F5E9,stroke:#43A047,stroke-width:2px
-    classDef dispute fill:#FFF3E0,stroke:#FB8C00,stroke-width:2px
-    classDef success fill:#E0F2F1,stroke:#00897B,stroke-width:2px
-    classDef refund fill:#FCE4EC,stroke:#C2185B,stroke-width:2px
+    %% State styling (with text color)
+    classDef initial fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px,color:#000
+    classDef funded fill:#E8F5E9,stroke:#43A047,stroke-width:2px,color:#000
+    classDef dispute fill:#FFF3E0,stroke:#FB8C00,stroke-width:2px,color:#000
+    classDef success fill:#E0F2F1,stroke:#00897B,stroke-width:2px,color:#000
+    classDef refund fill:#FCE4EC,stroke:#C2185B,stroke-width:2px,color:#000
 
     class CREATED initial
     class FUNDED funded
