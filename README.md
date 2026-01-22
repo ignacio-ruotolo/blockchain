@@ -126,6 +126,8 @@ stateDiagram-v2
     end note
 ``
 
+---
+
 ## 📣 Events
 
 - `Deposited`
