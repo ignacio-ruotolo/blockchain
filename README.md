@@ -1,6 +1,6 @@
 # blockchain
 Escrow Arrangement
-# EscrowArrangement Smart Contract
+# Escrow Arrangement Smart Contract
 
 ## 📌 Overview
 
@@ -127,7 +127,7 @@ stateDiagram-v2
     note right of REFUNDED
         Buyer refunded
     end note
-``
+```
 
 ---
 
