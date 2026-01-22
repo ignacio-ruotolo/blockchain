@@ -81,6 +81,9 @@ Resolves a dispute.
 
 ---
 
+## 🔄 State Diagram
+
+```mermaid
 stateDiagram-v2
     direction LR
 
