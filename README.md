@@ -116,3 +116,15 @@ Events enable easy tracking of contract activity from off-chain services such as
 ## 📄 License
 
 LGPL-3.0-only
+
+## 🔄 State Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> CREATED
+    CREATED --> FUNDED : deposit()
+    FUNDED --> RELEASED : release()
+    FUNDED --> DISPUTED : openDispute()
+    DISPUTED --> RELEASED : releaseByArbiter(1)
+    DISPUTED --> REFUNDED : releaseByArbiter(0)
+
