@@ -81,6 +81,51 @@ Resolves a dispute.
 
 ---
 
+stateDiagram-v2
+    direction LR
+
+    [*] --> CREATED
+
+    CREATED --> FUNDED : deposit()
+    FUNDED --> RELEASED : release()
+    FUNDED --> DISPUTED : openDispute()
+    DISPUTED --> RELEASED : releaseByArbiter(1)
+    DISPUTED --> REFUNDED : releaseByArbiter(0)
+
+    RELEASED --> [*]
+    REFUNDED --> [*]
+
+    %% State styling
+    classDef initial fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px
+    classDef funded fill:#E8F5E9,stroke:#43A047,stroke-width:2px
+    classDef dispute fill:#FFF3E0,stroke:#FB8C00,stroke-width:2px
+    classDef success fill:#E0F2F1,stroke:#00897B,stroke-width:2px
+    classDef refund fill:#FCE4EC,stroke:#C2185B,stroke-width:2px
+
+    class CREATED initial
+    class FUNDED funded
+    class DISPUTED dispute
+    class RELEASED success
+    class REFUNDED refund
+
+    %% Notes
+    note right of FUNDED
+        Funds locked in escrow
+    end note
+
+    note right of DISPUTED
+        Arbiter decision required
+    end note
+
+    note right of RELEASED
+        Seller receives ETH
+    end note
+
+    note right of REFUNDED
+        Buyer refunded
+    end note
+``
+
 ## 📣 Events
 
 - `Deposited`
@@ -116,15 +161,3 @@ Events enable easy tracking of contract activity from off-chain services such as
 ## 📄 License
 
 LGPL-3.0-only
-
-## 🔄 State Diagram
-
-```mermaid
-stateDiagram-v2
-    [*] --> CREATED
-    CREATED --> FUNDED : deposit()
-    FUNDED --> RELEASED : release()
-    FUNDED --> DISPUTED : openDispute()
-    DISPUTED --> RELEASED : releaseByArbiter(1)
-    DISPUTED --> REFUNDED : releaseByArbiter(0)
-
