@@ -1,5 +1,3 @@
-# blockchain
-Escrow Arrangement
 # Escrow Arrangement Smart Contract
 
 ## 📌 Overview
@@ -14,13 +12,16 @@ This project was built as a learning exercise and portfolio piece to demonstrate
 
 ## 🧠 Key Concepts Demonstrated
 
-- Solidity `0.8.x`
-- State machine design
-- Escrow logic
-- Role-based access control
-- Events and off-chain observability
-- NatSpec documentation
-- Checks-Effects-Interactions pattern
+| Concept          | Description                                              |
+| ---------------- | -------------------------------------------------------- |
+| Solidity `0.8.x` | Uses modern Solidity with built-in overflow checks       |
+| State Machine    | Explicit lifecycle control via `enum State`              |
+| Escrow Logic     | Funds locked and conditionally released or refunded      |
+| Access Control   | Buyer, seller, and arbiter roles enforced with `require` |
+| Events           | Enables off-chain tracking and frontend integration      |
+| NatSpec          | Structured documentation for contracts and functions     |
+| CEI Pattern      | Checks–Effects–Interactions for safer ETH transfers      |
+
 
 ---
 
@@ -139,6 +140,67 @@ stateDiagram-v2
 - `Reimbursed`
 
 Events enable easy tracking of contract activity from off-chain services such as frontends or indexers.
+
+---
+
+## 🚀 Deployment (Remix IDE)
+
+This contract is designed to be deployed using **Remix IDE**.
+
+### 1️⃣ Open Remix
+- Go to https://remix.ethereum.org
+- Create a new file: `EscrowArrangement.sol`
+- Paste the contract code
+
+### 2️⃣ Compile
+- Open **Solidity Compiler**
+- Select compiler version `0.8.24`
+- Click **Compile EscrowArrangement.sol**
+
+### 3️⃣ Deploy
+- Open **Deploy & Run Transactions**
+- Environment: `Remix VM (London)`
+- Account: select the **buyer** account
+- Constructor parameters:
+  - `_seller`: any other VM account
+  - `_arbiter`: a third VM account
+- Click **Deploy**
+
+---
+
+## 🧪 Testing the Escrow Flow (Remix)
+
+### ✅ Normal Flow (No Dispute)
+
+1. Call `deposit()`  
+   - Value: e.g. `1000 wei`
+   - State → `FUNDED`
+
+2. Call `release()` (buyer)  
+   - Funds sent to seller  
+   - State → `RELEASED`
+
+---
+
+### ⚠️ Dispute Flow
+
+1. Call `deposit()`  
+   - State → `FUNDED`
+
+2. Call `openDispute()` (buyer)  
+   - State → `DISPUTED`
+
+3. Switch account to **arbiter**
+
+4. Call `releaseByArbiter(1)`  
+   - Funds sent to seller  
+   - State → `RELEASED`
+
+**OR**
+
+4. Call `releaseByArbiter(0)`  
+   - Funds refunded to buyer  
+   - State → `REFUNDED`
 
 ---
 
